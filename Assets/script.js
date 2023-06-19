@@ -1,12 +1,12 @@
 
 let testDiv = document.querySelector(".test");
-let start = document.querySelector("#start");
+let startTest = document.querySelector("#start");
 
-start.addEventListener("click", function(event) {
+startTest.addEventListener("click", function(event) {
     event.preventDefault();
 
     startQuiz();
-})
+});
 
 function startQuiz() {
     let testBank = [
@@ -42,13 +42,13 @@ function startQuiz() {
     ];
 
     let testBankIndex = 0;
-    for (let i = 0; i < bank.length; i++) {
-        displayQuestion = testBank[testBankIndex];
+    for (let i = 0; i < testBank.length; i++) {
+        displayQuestion(testBank[i]);
     }
 }
 
 function displayQuestion(question) {
-    testDiv.textContent = question.testBank;
+    testDiv.textContent = question.question;
 }
 
 /*var mainEl = document.getElementById("main");
