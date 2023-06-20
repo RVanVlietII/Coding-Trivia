@@ -1,6 +1,11 @@
 
 let testDiv = document.querySelector(".test");
 let startTest = document.querySelector("#start");
+let timeEl = document.querySelector("#time");
+let scoreEl = document.querySelector("#score");
+
+question.appendChild(testDiv);
+choices.appendChild(testDiv);
 
 startTest.addEventListener("click", function(event) {
     event.preventDefault();
@@ -9,6 +14,7 @@ startTest.addEventListener("click", function(event) {
 });
 
 function startQuiz() {
+    
     let testBank = [
         {
             question: "What are the primitive data types?",
@@ -41,16 +47,44 @@ function startQuiz() {
         }
     ];
 
+    let time = 100
+
     let testBankIndex = 0;
     for (let i = 0; i < testBank.length; i++) {
         displayQuestion(testBank[i]);
+        if (choicesSelected !== answer) {
+
+            time -5
+        } else (choicesSelected === answer); {
+            testBank++
+
+        }
+
+            
     }
 }
 
 function displayQuestion(question) {
     testDiv.textContent = question.question;
 }
+function setTime() {
+    var timerInterval = setInterval(function() {
+        secondsLeft--;
+        timeEl.textContent = "Good Luck! Answer to the best of your ability";
 
+    if(secondsLeft === 0) {
+        sendMessage();
+    }
+    })
+}
+
+function sendMessage() {
+    testDiv.textContent = "Thank you! Submit your score at this time!";
+}
+function submission() {
+    name
+    scoreEl
+}
 /*var mainEl = document.getElementById("main");
 
 var secondsLeft = 100;
