@@ -1,154 +1,110 @@
-
+let timeEl = document.querySelector(".time");
+let scoreEl = document.querySelector(".score");
 let testDiv = document.querySelector(".test");
-let startTest = document.querySelector("#start");
-let timeEl = document.querySelector("#time");
-let scoreEl = document.querySelector("#score");
+let startBtn = document.getElementById("start");
 
-question.appendChild(testDiv);
-choices.appendChild(testDiv);
+testDiv.setAttribute("style", "font-size: 12px");
 
-startTest.addEventListener("click", function(event) {
-    event.preventDefault();
+//testBank.question into li
+//testBank.choices into li and button
+//answer needs to be a conditional statement where no time is lost if correct and time is lost for incorrect 
+//answer
+let currentQuestionIndex = 0;
+let score = 0;
+let time = 1000;
 
-    startQuiz();
-});
+let testBank = [
+    {
+        question: "What are the primitive data types?",
+        choices: ["boolean, string, undefined, number", "boolean, array, string, number", "string, function, boolean, number", "boolean, conditional, function, number"],
+        answer: "boolean, string, undefined, number"
+    },
+
+    {
+        question: "Which of these answers are boolean?",
+        choices: ["True", "yes", "correct", "right"],
+        answer: "True"
+    },
+
+    {
+        question: "What is a block of code that runs when called upon?",
+        choices: ["function", "conditional", "for-loop", "while-loop"],
+        answer: "function"
+    },
+
+    {  
+        question: "What block of code runs until the condition is met?",
+        choices: ["function", "conditonal", "for-loop", "calculation"],
+        answer: "for-loop"
+    },
+
+    {
+        question: "What code snippet allows you to store data locally on JS?",
+        choices: ["localStorage.setItem()", "localStorage.getItem", "localStorage.Value", "localStorage.clear"],
+        answer: "localStorage.setItem()"
+    }];
 
 function startQuiz() {
-    
-    let testBank = [
-        {
-            question: "What are the primitive data types?",
-            choices: ["boolean, string, undefined, number", "boolean, array, string, number", "string, function, boolean, number", "boolean, conditional, function, number"],
-            answer: "boolean, string, undefined, number"
-        },
-    
-        {
-            question: "Which of these answers are boolean?",
-            choices: ["True", "yes", "correct", "right"],
-            answer: "True"
-        },
-    
-        {
-            question: "What is a block of code that runs when called upon?",
-            choices: ["function", "conditional", "for-loop", "while-loop"],
-            answer: "function"
-        },
-    
-        {  
-            question: "What block of code runs until the condition is met?",
-            choices: ["function", "conditonal", "for-loop", "while-loop"],
-            answer: "for-loop"
-        },
-    
-        {
-            question: "What code snippet allows you to store data locally on JS?",
-            choices: ["localStorage.setItem()", "localStorage.getItem", "localStorage.Value", "localStorage.clear"],
-            answer: "localStorage.setItem()"
-        }
-    ];
-
-    let time = 100
-
-    let testBankIndex = 0;
-    for (let i = 0; i < testBank.length; i++) {
-        displayQuestion(testBank[i]);
-        if (choicesSelected !== answer) {
-
-            time -5
-        } else (choicesSelected === answer); {
-            testBank++
-
-        }
-
-            
-    }
-}
-
-function displayQuestion(question) {
-    testDiv.textContent = question.question;
-}
-function setTime() {
-    var timerInterval = setInterval(function() {
-        secondsLeft--;
-        timeEl.textContent = "Good Luck! Answer to the best of your ability";
-
-    if(secondsLeft === 0) {
-        sendMessage();
-    }
-    })
-}
-
-function sendMessage() {
-    testDiv.textContent = "Thank you! Submit your score at this time!";
-}
-function submission() {
-    name
-    scoreEl
-}
-/*var mainEl = document.getElementById("main");
-
-var secondsLeft = 100;
-
-function setTime() { //scope of function within yellow brackets
-  // Sets interval in variable
-  var timerInterval = setInterval(function() {
-    secondsLeft--;
-    timeEl.textContent = secondsLeft + " seconds left till colorsplosion.";
-
-    if(secondsLeft === 0) {
-      // Stops execution of action at set interval
-      clearInterval(timerInterval);
-      // Calls function to create and append image
-      sendMessage();
+    testDiv.innerHTML = "";
+    displayQuestion();
+    //let choiceButtons = document.querySelectorAll(".choice-button");
+    //choiceButtons.forEach((button) => {
+      /*choiceBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        let selectedAnswer = event.target.textContent;
+        checkAnswer(selectedAnswer);
+      });*/
+      currentQuestionIndex++;
     }
 
-  }, 1000); //10 seconds set as an argument or a Parameter for each countdown
+function displayQuestion() {
+    // Clear the testDiv before displaying the new question
+    testDiv.innerHTML = "";
+
+    let currentQuestion = testBank[currentQuestionIndex];
+    // Create buttons for each choice
+    let questionText = document.createElement("p");
+    questionText.textContent = currentQuestion.question;
+    testDiv.appendChild(questionText);
+        //for (let i = 0; i < question.length; i++);
+
+    let choicesList = document.createElement("ul");
+    let choicesItems = currentQuestion.choices;
+
+    for (let i = 0; i < choicesItems.length; i++) {
+        let choiceItem = document.createElement("li");
+        let choiceBtn = document.createElement("button");  
+        choiceBtn.textContent = choicesItems[i];
+        choiceItem.appendChild(choiceBtn);
+        choicesList.appendChild(choiceItem);
+        testDiv.appendChild(choiceItem);
+    
+    choiceBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        let selectedAnswer = event.target.textContent;
+        checkAnswer(selectedAnswer);
+    
+    })}
 }
-// Function to create and append colorsplosion image
-function sendMessage() {
-  timeEl.textContent = " ";
-  var imgEl = document.createElement("img");
-  imgEl.setAttribute("src", "images/image_1.jpg");
-  mainEl.appendChild(imgEl); //append makes something an element ****visible****
 
+function checkAnswer(selectedAnswer) {
+let currentQuestion = testBank[currentQuestionIndex];
+if (selectedAnswer === currentQuestion.answer) {
+    score += 10;
+    time--;
+} else { 
+    time -= 5;  
+}
+currentQuestionIndex++;
+if (currentQuestionIndex < testBank.length) {
+    displayQuestion();
+}   else {
+    console.log("Quiz finished! You're Score is ", score);
+}
 }
 
-setTime();
 
-/*function startQuiz () {
-    let testBank = [
-        {
-            question: "What are the primitive data types?",
-            choices: ["boolean, string, undefined, number", "boolean, array, string, number", "string, function, boolean, number", "boolean, conditional, function, number"],
-            answer: "boolean, string, undefined, number"
-        },
-    
-        {
-            question: "Which of these answers are boolean?",
-            choices: ["True", "yes", "correct", "right"],
-            answer: "True"
-        },
-    
-        {
-            question: "What is a block of code that runs when called upon?",
-            choices: ["function", "conditional", "for-loop", "while-loop"],
-            answer: "function"
-        },
-    
-        {  
-            question: "What block of code runs until the condition is met?",
-            choices: ["function", "conditonal", "for-loop", "while-loop"],
-            answer: "for-loop"
-        },
-    
-        {
-            question: "What code snippet allows you to store data locally on JS?",
-            choices: ["localStorage.setItem()", "localStorage.getItem", "localStorage.Value", "localStorage.clear"],
-            answer: "localStorage.setItem()"
-        }
-    ]
-    let currenttestBankIndex = 0;
-    for (let i = 0; i < bank.length; i++) {
-        let currentQuestion = testBank[currenttestBankIndex];
-    }
-}*/
+startBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    startQuiz();
+});
