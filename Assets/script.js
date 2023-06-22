@@ -64,7 +64,7 @@ function displayQuestion() {
         choiceItem.appendChild(choiceBtn);
         choicesList.appendChild(choiceItem);
         testDiv.appendChild(choiceItem);
-    
+        
     choiceBtn.addEventListener("click", function (event) {
         event.preventDefault();
         let selectedAnswer = event.target.textContent;
