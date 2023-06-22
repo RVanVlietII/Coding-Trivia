@@ -9,3 +9,4 @@ Please refer to the license in the repo.
 ## Deployment Img
 
 ## Deployment URL
+https://rvanvlietii.github.io/Coding-Trivia/
