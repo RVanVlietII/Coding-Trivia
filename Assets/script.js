@@ -5,13 +5,9 @@ let startBtn = document.getElementById("start");
 
 testDiv.setAttribute("style", "font-size: 12px");
 
-//testBank.question into li
-//testBank.choices into li and button
-//answer needs to be a conditional statement where no time is lost if correct and time is lost for incorrect 
-//answer
 let currentQuestionIndex = 0;
 let score = 0;
-let time = 1000;
+let time = 100;
 
 let testBank = [
     {
@@ -47,26 +43,16 @@ let testBank = [
 function startQuiz() {
     testDiv.innerHTML = "";
     displayQuestion();
-    //let choiceButtons = document.querySelectorAll(".choice-button");
-    //choiceButtons.forEach((button) => {
-      /*choiceBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        let selectedAnswer = event.target.textContent;
-        checkAnswer(selectedAnswer);
-      });*/
-      currentQuestionIndex++;
+    startTimer();
     }
 
 function displayQuestion() {
-    // Clear the testDiv before displaying the new question
     testDiv.innerHTML = "";
 
     let currentQuestion = testBank[currentQuestionIndex];
-    // Create buttons for each choice
     let questionText = document.createElement("p");
     questionText.textContent = currentQuestion.question;
     testDiv.appendChild(questionText);
-        //for (let i = 0; i < question.length; i++);
 
     let choicesList = document.createElement("ul");
     let choicesItems = currentQuestion.choices;
@@ -85,6 +71,8 @@ function displayQuestion() {
         checkAnswer(selectedAnswer);
     
     })}
+
+
 }
 
 function checkAnswer(selectedAnswer) {
@@ -93,18 +81,58 @@ if (selectedAnswer === currentQuestion.answer) {
     score += 10;
     time--;
 } else { 
-    time -= 5;  
+    time -= 10;  
 }
+scoreEl.textContent = "Score: " + score;
 currentQuestionIndex++;
 if (currentQuestionIndex < testBank.length) {
     displayQuestion();
 }   else {
     console.log("Quiz finished! You're Score is ", score);
+    submission();
 }
 }
 
+function startTimer() {
+    var timerInterval = setInterval(function() {
+        timeEl.textContent = console.log("Good Luck! Answer to the best of your ability");
+    
+    if(time === 0 /*|| testBank.length + 1*/) {
+        clearInterval(timerInterval);
+        sendMessage();
+        return;
+    }
+        time--;
+        timeEl.textContent = "Time: " + time;
+    
+      }, 1000);
+}
 
 startBtn.addEventListener("click", function(event) {
     event.preventDefault();
     startQuiz();
 });
+
+function sendMessage() {
+    testDiv.textContent = "Thank you! Submit your score at this time!";
+}
+function submission() {
+    testDiv.innerHTML = "";
+
+    let submitBtn = document.createElement("button");
+    submitBtn.textContent = "Submit High Score";
+    textDiv.appendChild(submitBtn);
+
+    submitBtn.addEventListener("click", function() {
+        let playerName = prompt("Type your name");
+        let highScore = {name: playerName, score: score };
+        
+    //let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+    
+    highScores.push(highScore);
+
+    highScores.sort((a, b) => b.score - a.score);
+
+    localStorage.setItem("highScores", JSON.stringifiy(highScores));
+    });
+}
