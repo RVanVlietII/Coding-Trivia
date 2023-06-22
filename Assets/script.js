@@ -87,7 +87,7 @@ scoreEl.textContent = "Score: " + score;
 currentQuestionIndex++;
 if (currentQuestionIndex < testBank.length) {
     displayQuestion();
-}   else {
+}   else if (time === 0 || currentQuestionIndez>testBank.length) {
     console.log("Quiz finished! You're Score is ", score);
     submission();
 }
@@ -100,6 +100,7 @@ function startTimer() {
     if(time === 0 /*|| testBank.length + 1*/) {
         clearInterval(timerInterval);
         sendMessage();
+        submission();
         return;
     }
         time--;
@@ -121,7 +122,7 @@ function submission() {
 
     let submitBtn = document.createElement("button");
     submitBtn.textContent = "Submit High Score";
-    textDiv.appendChild(submitBtn);
+    testDiv.appendChild(submitBtn);
 
     submitBtn.addEventListener("click", function() {
         let playerName = prompt("Type your name");
