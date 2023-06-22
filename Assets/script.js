@@ -44,7 +44,7 @@ function startQuiz() {
     testDiv.innerHTML = "";
     displayQuestion();
     startTimer();
-    }
+}
 
 function displayQuestion() {
     testDiv.innerHTML = "";
@@ -71,25 +71,23 @@ function displayQuestion() {
         checkAnswer(selectedAnswer);
     
     })}
-
-
 }
 
 function checkAnswer(selectedAnswer) {
-let currentQuestion = testBank[currentQuestionIndex];
-if (selectedAnswer === currentQuestion.answer) {
-    score += 10;
-    time--;
-} else { 
-    time -= 10;  
-}
-scoreEl.textContent = "Score: " + score;
-currentQuestionIndex++;
-if (currentQuestionIndex < testBank.length) {
-    displayQuestion();
-}   else if (time === 0 || currentQuestionIndex >= testBank.length) {
-    submission();
-}
+    let currentQuestion = testBank[currentQuestionIndex];
+    if (selectedAnswer === currentQuestion.answer) {
+        score += 10;
+        time--;
+    } else { 
+        time -= 10;  
+    }
+    scoreEl.textContent = "Score: " + score;
+    currentQuestionIndex++;
+    if (currentQuestionIndex < testBank.length) {
+     displayQuestion();
+    }   else if (time === 0 || currentQuestionIndex >= testBank.length) {
+        submission();
+    }
 }
 
 function startTimer() {
@@ -110,7 +108,6 @@ startBtn.addEventListener("click", function(event) {
     event.preventDefault();
     startQuiz();
 });
-
 
 
 function submission() {
