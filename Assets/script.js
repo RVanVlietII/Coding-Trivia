@@ -7,7 +7,7 @@ testDiv.setAttribute("style", "font-size: 12px");
 
 let currentQuestionIndex = 0;
 let score = 0;
-let time = 100;
+let time = 50;
 
 let testBank = [
     {
@@ -129,9 +129,9 @@ function submission() {
         
     //let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
     
-    highScores.push(highScore);
+    //highScores.push(highScore);
 
-    highScores.sort((a, b) => b.score - a.score);
+    //highScores.sort((a, b) => b.score - a.score);
 
     localStorage.setItem("highScores", JSON.stringifiy(highScores));
     });
