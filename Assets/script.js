@@ -120,8 +120,8 @@ function submission() {
     submitBtn.addEventListener("click", function() {
         event.preventDefault();
 
-        const playerName = prompt("Type your name");
-        const highScore = {name: playerName, score: score };
+        const playerInitials = prompt("Type your Initials");
+        const highScore = {name: playerInitials, score: score };
         
 
     localStorage.setItem("highScores", JSON.stringify(highScore));
