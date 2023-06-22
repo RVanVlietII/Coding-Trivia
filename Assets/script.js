@@ -87,19 +87,16 @@ scoreEl.textContent = "Score: " + score;
 currentQuestionIndex++;
 if (currentQuestionIndex < testBank.length) {
     displayQuestion();
-}   else if (time === 0 || currentQuestionIndez>testBank.length) {
-    console.log("Quiz finished! You're Score is ", score);
+}   else if (time === 0 || currentQuestionIndex >= testBank.length) {
     submission();
 }
 }
 
 function startTimer() {
     var timerInterval = setInterval(function() {
-        timeEl.textContent = console.log("Good Luck! Answer to the best of your ability");
-    
-    if(time === 0 /*|| testBank.length + 1*/) {
+
+    if(time === 0 || time <= 0 || currentQuestionIndex >= testBank.length) {
         clearInterval(timerInterval);
-        sendMessage();
         submission();
         return;
     }
@@ -114,26 +111,22 @@ startBtn.addEventListener("click", function(event) {
     startQuiz();
 });
 
-function sendMessage() {
-    testDiv.textContent = "Thank you! Submit your score at this time!";
-}
+
+
 function submission() {
     testDiv.innerHTML = "";
 
-    let submitBtn = document.createElement("button");
+    const submitBtn = document.createElement("button");
     submitBtn.textContent = "Submit High Score";
     testDiv.appendChild(submitBtn);
 
     submitBtn.addEventListener("click", function() {
-        let playerName = prompt("Type your name");
-        let highScore = {name: playerName, score: score };
+        event.preventDefault();
+
+        const playerName = prompt("Type your name");
+        const highScore = {name: playerName, score: score };
         
-    //let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-    
-    //highScores.push(highScore);
 
-    //highScores.sort((a, b) => b.score - a.score);
-
-    localStorage.setItem("highScores", JSON.stringifiy(highScores));
+    localStorage.setItem("highScores", JSON.stringify(highScore));
     });
 }
