@@ -2,7 +2,7 @@ let timeEl = document.querySelector(".time");
 let scoreEl = document.querySelector(".score");
 let testDiv = document.querySelector(".test");
 let startBtn = document.getElementById("start");
-
+let restartBtn = document.getElementById("reset");
 testDiv.setAttribute("style", "font-size: 12px");
 
 let currentQuestionIndex = 0;
@@ -114,6 +114,17 @@ startBtn.addEventListener("click", function(event) {
     startQuiz();
 });
 
+restartBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    currentQuestionIndex = 0;
+    score = 0;
+    time = 50;
+    scoreEl.textContent = "Score: " + score;
+    timeEl.textContent = "Time: " + time;
+    startQuiz();
+});
+
+
 
 function submission() {
     testDiv.innerHTML = "";
@@ -130,13 +141,6 @@ function submission() {
         
 
     localStorage.setItem("highScores", JSON.stringify(highScore));
-    //reset();
-    testDiv.innerHTML = "";
-        startBtn.style.display = "block";
+    
     });
 }
-
-//function reset() {
-    
-   // startBtn.style.display = "block";
-//}
