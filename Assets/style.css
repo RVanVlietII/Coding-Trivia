@@ -15,7 +15,6 @@ ol,
 li {
     display: flex;
     justify-content: center;
-    text-align: left;
 }
 
 .choices-list {
@@ -25,12 +24,12 @@ li {
   
   .choice-item {
     display: flex;
-    text-align: left;
+    justify-content: center;
   }
   
   .choice-button {
     flex: 0.5;
-    /* Add other styles as desired */
+    display: block;
   }
 
 .test {
@@ -41,16 +40,26 @@ li {
     width: 75%;
     margin: 0 auto;
     justify-content: center;
+    align-items: center;
 }
 
 @media screen and (max-width: 480px) {
     body {
         text-align: center;
-        justify-content: center;
+        font-size: 10px;
+        justify-items: center;
     }
-    ol, 
-    li {
-    display: flex;
-    justify-content: center;
+
+    .test {
+        padding: 100px;
+        border: 10px solid black;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 75%;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
     }
 }
